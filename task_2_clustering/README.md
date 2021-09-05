@@ -1,36 +1,46 @@
-# _Association Rules Mining_
+# _Clustering_
 
-_**Association Rules Mining**_ adalah teknik _data mining_ yang bertujuan untuk menemukan aturan asosiatif antara suatu kombinasi item pada data.Contoh aturan asosiatif dari analisa pembelian di suatu supermarket adalah dapat diketahui seberapa besar kemungkinan seorang pelanggan membeli roti bersamaan dengan susu. Secara umum, _association rules_ mempunyai bentuk, dimana dan tersebut adalah himpunan item. Jika setiap item dalam terdapat dalam transaksi, maka setiap item dalam juga terdapat dalam transaksi.
+_**Clustering**_ adalah sebuah proses untuk mengelompokkan data ke dalam beberapa _cluster_ atau kelompok sehingga data dalam satu _cluster_ memiliki tingkat kemiripan yang maksimum dan data antar _cluster_ memiliki kemiripan yang minimum (Tan, 2006). Objek di dalam _cluster_ memiliki kasamaan karakteristik antar satu sama lain dan berbeda dengan _cluster_ yang lain. Partisi dilakukan dengan suatu algoritma _clustering_. _Clustering_ sangat berguna karena mampu menemukan _group_ atau kelompok yang tidak dikenal dalam data. _Clustering_ banyak digunakan dalam berbagai aplikasi seperti misalnya pada _business inteligence_, pengenalan pola citra, _web search_, bidang ilmu biologi, dan untuk keamanan (_security_).
 
-Terdapat tiga parameter penting yang sering digunakan dalam menentukan aturan _(rules)_ yang menarik,
+Beberapa metode dalam melakukan _clustering_ adalah sebagai berikut.
 
-_**1. Support**_
+## _K-Means_
 
-_**Support**_ dari suatu _association rules_ adalah persentasi kombinasi item tersebut dalam _database_, dimana jika terdapat item A dan item B maka _support_ adalah proporsi dari transaksi dalam _database_ yang mengandung A dan B.
+_K-Means_ merupakan salah satu algoritma klastering dengan metode partisi (_partitioning method_) yang berbasis titik pusat (_centroid_) selain algoritma _k-Medoids_ yang berbasis obyek. Berikut adalah algoritma _K-Means._
 
-_**2. Confidence**_
+>- Tentukan berapa banyak_ cluster k_ dari _dataset_ yang akan dibagi.
+>- Tetapkan secara acak data _k_ menjadi pusat awal lokasi klaster.
+>- Untuk masing-masing data, temukan pusat_ cluster _terdekat. Dengan demikian berarti masing-masing pusat_ cluster _memiliki sebuah subset dari _dataset_, sehingga mewakili bagian dari _dataset_. Oleh karena itu, telah terbentuk_ cluster k: C1, C2, C3, …, Ck._
+>- Untuk masing-masing_ cluster k_, temukan pusat luasan klaster, dan perbarui lokasi dari masing-masing  pusat_ cluster _ke nilai baru dari  pusat luasan.
+>- Ulangi langkah ketiga dan kelima hingga data pada tiap_ cluster _menjadi terpusat atau selesai.
 
-_**Confidence**_ dari _association rules_ adalah ukuran ketepatan suatu _rule_, yaitu persentasi transaksi dalam _database_ yang mengandung A dan mengandung B. Dengan adanya _confidence_ kita dapat mengukur kuatnya hubungan antar item dalam _association rules_.
+## _K-Medoids_
 
-_**3. Lift Ratio**_
+_K-Medoids_ adalah metode _cluster_ non hirarki yang merupakan varian dari metode _K-Means_. _K-Medoids_ hadir untuk mengatasi kelemahan _K-Means_ yang sensitif terhadap _outlier_ karena suatu objek dengan suatu nilai yang besar mungkin secara substansial menyimpang dari distribusi data (Jiawei &amp; Kamber, 2006). Hal ini didasarkan pada penggunaan _medoids_ bukan dari pengamatan mean yang dimiliki oleh setiap _cluster_, dengan tujuan mengurangi sensitivitas dari partisi sehubungan dengan nilai ekstrim yang ada dalam _dataset_ (Vercellis, 2009). Langkah-langkah pada metode _K-Medoids_ adalah:
 
-_**Lift Ratio**_ adalah suatu ukuran untuk mengetahui kekuatan aturan asosisasi yang telah terbentuk. Nilai _lift ratio_ biasanya digunakan sebagai penentu apakah aturan asosiasi valid atau tidak valid.
+>- Tentukan _k _(jumlah _cluster_) yang diinginkan
+>- Pilih secara acak _medoid_ awal sebanyak _k _dari _n_ data
+>- Hitung jarak masing-masing objek ke _medoid_ sementara, kemudian tandai jarak terdekat objek ke _medoid_ dan hitung totalnya.
+>- Lakukan iterasi _medoid._
+>- Hitung total simpangan (_S_). Jika _a_ adalah jumlah jarak terdekat antara objek ke _medoid_ awal, dan b adalah jumlah jarak terdekat antara objek ke _medoid_ baru, maka total simpangan adalah _S = b - a_, Jika _S < 0_, maka tukar objek dengan data untuk membentuk sekumpulan _k_ baru sebagai _medoid_.
+>- Ulangi langkah 3 sampai 5 dan hentikan jika sudah tidak terjadi perubahan anggota _medoid._
 
-# _Apriori Algorithm_
+## _Hierarchical Clustering_
 
-_Apriori Algorithm_ menggunakan frekuensi _itemsets_ untuk menghasilkan aturan asosiasi. Algoritma ini banyak digunakan untuk bekerja pada _database_ yang berisi transaksi. Algoritma _Apriori_ memiliki langkah-langkah sebagai berikut.
+Pada _hierarchical clustering_ data dikelompokkan melalui suatu bagan yang berupa hirarki, dimana terdapat penggabungan dua grup yang terdekat disetiap iterasinya ataupun pembagian dari seluruh set data kedalam _cluster_. Langkah-langkah melakukan _Hierarchical clustering_:
 
-> -   Menentukan minimum _support_.
-> -   Iterasi 1, hitung setiap item dari _support_ (transaksi yang memuat seluruh item) dengan melakukan _scan database_ untuk _1-itemset_, setelah _1-itemset_ didapatkan, dari _1-itemset_ tersebut apakah berada di atas minimum _support_, apabila telah memenuhi minimum _support_, _1-itemset_ tersebut akan menjadi pola frekuensi tinggi.
-> -   Iterasi 2, untuk mendapatkan _2-itemset_, perlu dilakukan kombinasi dari _k-itemset_ sebelumnya, kemudian _scan database_ untuk menghitung setiap item yang memuat _support_. _Itemset_ yang memenuhi minimum _support_ akan dipilih sebagai pola frekuensi tinggi dari kandidat.
-> -   Tetapkan nilai _k-itemset_ dari _support_ yang telah memenuhi minimum _support_ dari _k-itemset_.
-> -   Lakukan proses untuk iterasi selanjutnya hingga tidak ada lagi _k-itemset_ yang memenuhi minimum _support_.
+>- Identifikasi item dengan jarak terdekat.
+>- Gabungkan item itu kedalam satu _cluster._
+>- Hitung jarak antar _cluster_.
+>- Ulangi dari awal sampai semua terhubung.
 
-# _Frequent Pattern Growth Algorithm (FP-Growth)_
+## _Density-Based Spatial Clustering of Application with Noise (DBSCAN)_
 
-Algoritma _FP-Growth_ merupakan perbaikan dari Algoritma _Apriori_. Berbeda dengan algoritma _Apriori_ dimana kita menghasilkan kandidat _frequent-itemset_ di setiap iterasi, _FP-Growth_ bekerja dengan menggunakan _FP-Tree_. Adapun langkah-langkah dalam algoritma _FP-Growth_ adalah sebagai berikut.
+_Density-Based Spatial Clustering of Application with Noise (DBSCAN)_ merupakan sebuah metode _clustering_ yang membangun area berdasarkan kepadatan yang terkoneksi (_density-connected_). Setiap objek dari sebuah radius area (_cluster_) harus mengandung setidaknya sejumlah minimum data. Semua objek yang tidak termasuk di dalam _cluster_ dianggap sebagai _noise_. Komputasi dari _DBSCAN_ adalah sebagai berikut.
 
-> -   Deduksi item yang sering dipesan. Untuk item dengan frekuensi yang sama, urutannya diberikan menurut urutan abjad.
-> -   Bangun _FP-Tree_ berdasarkan transaksi yang tersedia.
-> -   Dari _FP-Tree_ yang ada, buat _FP-conditional tree_ untuk setiap item atau _itemset_.
-> -   Tentukan pola _frequent pattern._
+>- Inisialisasi parameter _minpts, eps._
+>- Tentukan titik awal atau _p_ secara acak.
+>- Ulangi langkah 3 sampai 5 hingga semua titik diproses.
+>- Hitung _eps_ atau semua jarak titik yang _density reachable_ terhadap _p_.
+>- Jika titik yang memenuhi _eps_ lebih dari _minpts_ maka titik _p_ adalah _core point_ dan _cluster_ terbentuk.
+>- Jika _p_ adalah _border point_ dan tidak ada titik yang _density reachable_ terhadap _p_, maka proses dilanjutkan ke titik yang lain.
